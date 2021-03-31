@@ -1,12 +1,11 @@
-let arr = [1, 1, 'string', 'string', true, true, false, false, undefined, undefined, null, null, NaN, NaN, 0, 0, {}, {}, {a: 1}, {a: 1}]
-
-
 /**
+ * 数组去重
  * 每个去重方法都统一省略判断传入的值是否为数组这一步骤
  * 判断数组方法：Array.isArray(arr)
  * 返回bool：true即为数组，false不是数组不进行判断
  */
 
+let arr = [1, 1, 'string', 'string', true, true, false, false, undefined, undefined, null, null, NaN, NaN, 0, 0, {}, {}, {a: 1}, {a: 1}]
 
 /**
  * 以下方法：A

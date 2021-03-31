@@ -1,4 +1,7 @@
-// 找出nums数组中相加等于target的数组索引下标
+/**
+ * 找出nums数组中相加等于target的数组索引下标
+ */
+
 let nums = [2, 7, 11, 15], target = 9
 
 const twoSum = function (nums, target) {
