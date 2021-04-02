@@ -1,23 +1,17 @@
 /**
- * 手写bind
+ * 自定义bind实现
+ * @param context 上下文this对象
+ * @returns {Function}
+ * 用法：fn.bind(thisObj, arg1, arg2, argN)
+ * 作用：对this的强绑定，改变函数执行时的this指向。
  */
 
-Function.prototype.myBind = function (context = globalThis) {
-  const fn = this
-  const args = Array.from(arguments).slice(1)
-  const newFunc = function () {
-    const newArgs = args.concat(...arguments)
-    if (this instanceof newFunc) {
-      // 通过 new 调用，绑定 this 为实例对象
-      fn.apply(this, newArgs)
-    } else {
-      // 通过普通函数形式调用，绑定 context
-      fn.apply(context, newArgs)
-    }
+Function.prototype.myBind = function (context) {
+  // 判断传入的context是否为对象，若不为object则指向全局window
+  context = (typeof context === 'object' ? context : window)
+  return (...args)=>{
+    this.call(context, ...args)
   }
-  // 支持 new 调用方式
-  newFunc.prototype = Object.create(fn.prototype)
-  return newFunc
 }
 
 const me = {
@@ -28,7 +22,7 @@ const other = {
 }
 
 function say() {
-  console.log(`My name is ${this.name || 'default'}`);
+  console.log(`My name is ${this.name || 'default'}`)
 }
 
 const meSay = say.myBind(me)
