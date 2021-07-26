@@ -6,17 +6,17 @@
  */
 
 const action = () => {
-  console.log('节流函数执行')
+  console.log('节流函数执行', )
 }
 
 function throttle(func, wait) {
-  let timer
-  return () => {
-    if(!timer) {
-      timer = setTimeout(() => {
-        timer = false
-        func()
-      }, wait)
+  let canUse = true
+  console.log(canUse)
+  return (...agrs) => {
+    if(canUse) {
+      func.apply(this, agrs) 
+      canUse = false
+      setTimeout(() => (canUse = true), wait) 
     }
   }
 }

@@ -10,12 +10,13 @@ const myAction = function () {
 }
 
 function debounce(func, interval = 1000) {
-  var timer = null
-  return () => {
-    if (timer) {
-      clearTimeout(timer)
-    }
-    timer = setTimeout(func, interval)
+  let timer = null
+  return (...args) => {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      func.apply(this, args)
+      timer = null
+    }, interval)
   }
 }
 
