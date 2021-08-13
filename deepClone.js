@@ -1,7 +1,13 @@
+/**
+ * 手写深克隆
+ * @param {*} obj 克隆的对象
+ * @param {*} cache WeakMap
+ */
 function deepCopy(obj, cache = new WeakMap()) {
   // 1.判断是否为对象
   if (!obj instanceof Object) return obj
   
+  console.log({cache})
   // 2.防止循环引用
   if (cache.get(obj)) return cache.get(obj)
   
@@ -25,10 +31,7 @@ function deepCopy(obj, cache = new WeakMap()) {
   cache.set(obj, res)
 
   Object.keys(obj).forEach((key) => {
-      console.log(`key: ${key} - value: ${obj[key]}`)
-      console.log('obj', res)
       res[key] = obj[key] instanceof Object ? deepCopy(obj[key], cache) : obj[key]
-      
   });
   return res
 }
